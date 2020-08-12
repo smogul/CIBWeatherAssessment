@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:CIBApp.Functions"
+             mc:Ignorable="d"
+             x:Class="CIBApp.Views.WeatherDashboard"
+             Title="Daily Weather">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <local:DateConverter x:Key="dateConverter"/>
+            <local:TempConverter x:Key="tempConverter"/>
+            <local:MinTempConverter x:Key="minTempConverter"/>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="10, 20, 10, 0" />
+            <On Platform="Android, UWP" Value="10, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+
+    <ListView x:Name="listView"
+              SeparatorVisibility="None"
+              ItemSelected="OnListViewItemSelected">
+        <ListView.RowHeight>
+            <OnPlatform x:TypeArguments="x:Int32">
+                <On Platform="iOS, Android" Value="80" />
+                <On Platform="UWP" Value="90" />
+            </OnPlatform>
+        </ListView.RowHeight>
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ContentView Padding="5">
+                        <Frame OutlineColor="LightSkyBlue"
+                               Padding="10">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Temp.Max, Converter={StaticResource tempConverter}}"
+                                       FontAttributes="Bold"
+                                       FontSize="28"
+                                       TextColor="Green"
+                                       Margin="5"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       WidthRequest="55"
+                                       HeightRequest="30" />
+                                <StackLayout>
+                                    <Label Text="{Binding Dt, Converter={StaticResource dateConverter}}"
+                                           FontSize="22"
+                                           VerticalOptions="StartAndExpand" />
+                                    <Label Text="{Binding Temp.Min, Converter={StaticResource minTempConverter}}"
+                                           FontSize="16"
+                                           VerticalOptions="CenterAndExpand" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </ContentView>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+
+
+</ContentPage>

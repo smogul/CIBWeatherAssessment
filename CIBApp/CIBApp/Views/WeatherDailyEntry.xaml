@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:CIBApp.Functions"
+             mc:Ignorable="d"
+             Title="Weather Details"
+             x:Class="CIBApp.Views.WeatherDailyEntry">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="parentLabelResult" 
+                   TargetType="Label">
+                <Setter Property="FontSize" 
+                        Value="28" />
+                <Setter Property="TextColor" 
+                        Value="Green" />
+                
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Start"/>
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+
+
+                <!--FontAttributes="Bold"
+                                       FontSize="28"
+                                       TextColor="Green"-->
+            </Style>
+
+            <Style x:Key="childLabelResult" 
+                   TargetType="Label">
+                <Setter Property="FontSize" 
+                        Value="22" />
+                <Setter Property="TextColor" 
+                        Value="Orange" />
+               
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Start"/>
+                <Setter Property="FontAttributes"
+                        Value="Italic"/>
+            </Style>
+
+            <Style x:Key="granChildLabelResult" 
+                   TargetType="Label">
+                <Setter Property="FontSize" 
+                        Value="22" />
+                <Setter Property="TextColor" 
+                        Value="Orange" />
+
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Start"/>
+                <Setter Property="FontAttributes"
+                        Value="None"/>
+            </Style>
+
+            <local:DateConverter x:Key="dateConverter"/>
+            <local:SunriseConverter x:Key="sunriseConverter"/>
+            <local:SunsetConverter x:Key="sunsetConverter"/>
+            <local:MornTempConverter x:Key="mornTempConverter"/>
+            <local:FLMornTempConverter x:Key="fLMornTempConverter"/>
+            <local:CloudsTempConverter x:Key="cloudsTempConverter"/>
+            <local:HumidityTempConverter x:Key="humidityTempConverter"/>
+            <local:PressureConverter x:Key="pressureConverter"/>
+            <local:DewPointTempConverter x:Key="dewPointTempConverter"/>
+            <local:WindDegConverter x:Key="windDegConverter"/>
+            <local:WindSpeedConverter x:Key="windSpeedConverter"/>
+            <local:PopConverter x:Key="popConverter"/>
+
+
+
+
+
+
+
+
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <ContentView Padding="5">
+            <Frame OutlineColor="LightGreen"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                               Padding="10">
+                <ScrollView>
+                    <StackLayout Padding="10">
+
+                        
+                        <Label Text="Weather Summary" 
+                       Style="{StaticResource parentLabelResult}" />
+                        
+                        <Label Text="{Binding Sunrise, Converter={StaticResource sunriseConverter}}" 
+                       Style="{StaticResource childLabelResult}" />
+
+                       <Label Text="{Binding Sunset, Converter={StaticResource sunsetConverter}}" 
+                       Style="{StaticResource childLabelResult}" />
+
+                        <Label Text="{Binding FeelsLike.Morn,Converter={StaticResource fLMornTempConverter}}" 
+                       Style="{StaticResource childLabelResult}" />
+
+                        <Label Text="{Binding Temp.Morn,Converter={StaticResource mornTempConverter}}" 
+                       Style="{StaticResource childLabelResult}" />
+                        
+                        <Label Text="{Binding Clouds,Converter={StaticResource cloudsTempConverter}}" 
+                       Style="{StaticResource childLabelResult}" />
+
+
+                        <Label Text="{Binding Humidity,Converter={StaticResource humidityTempConverter}}" 
+                       Style="{StaticResource childLabelResult}" />
+
+                    
+                        
+                        <Label Text="Scientific Summary" 
+                       Style="{StaticResource parentLabelResult}" />
+
+                        <Label Text="{Binding Pressure,Converter={StaticResource pressureConverter}}" 
+                       Style="{StaticResource granChildLabelResult}" />
+
+                      
+                        <Label Text="{Binding DewPoint,Converter={StaticResource dewPointTempConverter}}" 
+                       Style="{StaticResource granChildLabelResult}" />
+
+
+                        <Label Text="{Binding WindDeg,Converter={StaticResource windDegConverter}}" 
+                       Style="{StaticResource granChildLabelResult}" />
+
+
+                        <Label Text="{Binding WindSpeed,Converter={StaticResource windSpeedConverter}}" 
+                       Style="{StaticResource granChildLabelResult}" />
+
+                       
+                        <Label Text="{Binding Pop,Converter={StaticResource popConverter}}" 
+                       Style="{StaticResource granChildLabelResult}" />
+
+                    </StackLayout>
+                </ScrollView>
+            </Frame>
+            
+            
+            
+        </ContentView>
+        
+        
+        
+    </ContentPage.Content>
+</ContentPage>
